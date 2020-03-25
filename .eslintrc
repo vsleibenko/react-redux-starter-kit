@@ -1,0 +1,29 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": 0,
+    "react/button-has-type": 0,
+    "import/prefer-default-export": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "no-control-regex": 0,
+    "no-underscore-dangle": 0,
+    "react/jsx-props-no-spreading": 0,
+    "camelcase": 0
+  },
+  "env": {
+    "browser": true,
+    "jest": true,
+    "cypress/globals": true
+  },
+  "plugins": [
+    "cypress"
+  ],
+  "globals": {
+    "given": "readonly",
+    "when": "readonly",
+    "then": "readonly"
+  }
+}
