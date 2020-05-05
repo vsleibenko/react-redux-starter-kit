@@ -25,25 +25,25 @@ function App() {
   const isLogged = useSelector(userSelectors.selectUser);
 
   const loggedInRoutes = (
-    <>
-      <Route path={routes.home} component={Home} />
-      <Route path="*" render={() => <Redirect to={routes.home} />} />
-    </>
+    <Router>
+      <Switch>
+        <Route path={routes.home} component={Home} />
+        <Route path="*" render={() => <Redirect to={routes.home} />} />
+      </Switch>
+    </Router>
   );
 
   const loggedOutRoutes = (
-    <>
-      <Route exact path={routes.root} component={Root} />
-      <Route path="*" render={() => <Redirect to={routes.root} />} />
-    </>
+    <Router>
+      <Switch>
+        <Route exact path={routes.root} component={Root} />
+        <Route path="*" render={() => <Redirect to={routes.root} />} />
+      </Switch>
+    </Router>
   );
 
   return (
-    <Router>
-      <Switch>
-        { isLogged ? loggedInRoutes : loggedOutRoutes }
-      </Switch>
-    </Router>
+    isLogged ? loggedInRoutes : loggedOutRoutes
   );
 }
 

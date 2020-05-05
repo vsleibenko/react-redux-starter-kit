@@ -18,11 +18,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "export BROWSER=none && yarn run eslint && pm2 start npm -- start && npm run test:cypress && pm2 kill && npm run test:jest",
+    "test": "export BROWSER=none && npm run eslint && npm run test:cypress && npm run test:jest",
     "test:jest": "react-scripts test --watchAll=false --forceExit",
     "eject": "react-scripts eject",
     "cypress": "./node_modules/.bin/cypress open",
-    "test:cypress": "./node_modules/.bin/cypress run --spec **/*.feature",
+    "test:cypress": "./node_modules/.bin/pm2 start npm -- start && ./node_modules/.bin/cypress run --spec **/*.feature && ./node_modules/.bin/pm2 kill",
     "precommit": "lint-staged",
     "eslint": "node_modules/.bin/eslint src/ --max-warnings=0"
   },
@@ -56,6 +56,7 @@
     "eslint-plugin-react": "^7.16.0",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.7",
+    "pm2": "^4.4.0",
     "redux-mock-store": "^1.5.4"
   },
   "jest": {
@@ -68,15 +69,12 @@
   },
   "lint-staged": {
     "*.{js, jsx}": [
-      "node_modules/.bin/eslint --max-warnings=0"
-    ],
-    "*": [
-      "yarn run test"
+      "npm run eslint"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run precommit"
+      "pre-commit": "npm run precommit"
     }
   }
 }
